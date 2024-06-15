@@ -8,7 +8,7 @@ class TabProvider with ChangeNotifier {
   Color? textSelectedColor;
   Color? textUnselectedColor;
   String? searchText;
-  String rating = GiphyRating.g;
+  String rating = GiphyRating.pg13;
   String lang = GiphyLanguage.english;
   String randomID = "";
 

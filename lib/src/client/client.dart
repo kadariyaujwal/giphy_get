@@ -24,7 +24,7 @@ class GiphyClient {
   Future<GiphyCollection> trending({
     int offset = 0,
     int limit = 30,
-    String rating = GiphyRating.g,
+    String rating = GiphyRating.pg13,
     String lang = GiphyLanguage.english,
     String type = GiphyType.gifs,
   }) async {
@@ -45,7 +45,7 @@ class GiphyClient {
     String query, {
     int offset = 0,
     int limit = 30,
-    String rating = GiphyRating.g,
+    String rating = GiphyRating.pg13,
     String lang = GiphyLanguage.english,
     String type = GiphyType.gifs,
   }) async {
@@ -66,7 +66,7 @@ class GiphyClient {
   Future<GiphyCollection> emojis({
     int offset = 0,
     int limit = 30,
-    String rating = GiphyRating.g,
+    String rating = GiphyRating.pg13,
     String lang = GiphyLanguage.english,
   }) async {
     return _fetchCollection(
@@ -85,7 +85,7 @@ class GiphyClient {
 
   Future<GiphyGif> random({
     required String tag,
-    String rating = GiphyRating.g,
+    String rating = GiphyRating.pg13,
     String type = GiphyType.gifs,
   }) async {
     return _fetchGif(
