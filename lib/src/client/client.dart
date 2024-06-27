@@ -16,9 +16,10 @@ class GiphyClient {
   final Client _client = Client();
   final String _random_id;
   final String _apiVersion = 'v1';
-
-  GiphyClient({required String apiKey, required String randomId})
+  final String _rating;
+  GiphyClient({required String apiKey, required String randomId, String? rating})
       : _apiKey = apiKey,
+        _rating = rating??GiphyRating.g,
         _random_id = randomId;
 
   Future<GiphyCollection> trending({
@@ -34,7 +35,7 @@ class GiphyClient {
         queryParameters: <String, String>{
           'offset': '$offset',
           'limit': '$limit',
-          'rating': rating,
+          'rating': _rating,
           'lang': lang
         },
       ),
@@ -56,7 +57,7 @@ class GiphyClient {
           'q': query,
           'offset': '$offset',
           'limit': '$limit',
-          'rating': rating,
+          'rating': _rating,
           'lang': lang,
         },
       ),
@@ -75,9 +76,8 @@ class GiphyClient {
         queryParameters: <String, String>{
           'offset': '$offset',
           'limit': '$limit',
-          'rating': rating,
+          'rating': _rating,
           'lang': lang,
-          
         },
       ),
     );
@@ -93,7 +93,7 @@ class GiphyClient {
         path: '$_apiVersion/$type/random',
         queryParameters: <String, String>{
           'tag': tag,
-          'rating': rating,
+          'rating': _rating,
         },
       ),
     );
