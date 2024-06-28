@@ -31,6 +31,7 @@ class GiphyGetWrapper extends StatelessWidget {
     bool showGIFs = true,
     bool showStickers = true,
     bool showEmojis = true,
+    List<String> filterWords = const [],
   }) async {
     GiphyGif? gif = await GiphyGet.getGif(
       queryText: queryText,
@@ -41,6 +42,7 @@ class GiphyGetWrapper extends StatelessWidget {
       showStickers: showStickers,
       showEmojis: showEmojis,
       debounceTimeInMilliseconds: 350,
+      filterWords: filterWords,
     );
     if (gif != null) streamController.add(gif);
   }

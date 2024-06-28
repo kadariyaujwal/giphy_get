@@ -211,7 +211,7 @@ class _GiphyTabDetailState extends State<GiphyTabDetail> {
 
     // Giphy Client from library
     GiphyClient client = GiphyClient(
-        apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID);
+        apiKey: _tabProvider.apiKey, randomId: _tabProvider.randomID, filterWords: _tabProvider.filterWords);
 
     // Offset pagination for query
     if (_collection == null) {

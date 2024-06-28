@@ -11,7 +11,7 @@ class TabProvider with ChangeNotifier {
   String rating = GiphyRating.pg13;
   String lang = GiphyLanguage.english;
   String randomID = "";
-
+  List<String> filterWords;
   String? _tabType;
   String get tabType => _tabType ?? '';
   set tabType(String tabType) {
@@ -28,6 +28,7 @@ class TabProvider with ChangeNotifier {
     required this.rating,
     required this.randomID,
     required this.lang,
+    this.filterWords = const [],
   });
 
   void setTabColor(Color tabColor) {

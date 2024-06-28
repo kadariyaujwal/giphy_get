@@ -17,9 +17,12 @@ class GiphyClient {
   final String _random_id;
   final String _apiVersion = 'v1';
   final String _rating;
-  GiphyClient({required String apiKey, required String randomId, String? rating})
+  final List<String> _filterWords;
+  GiphyClient(
+      {required String apiKey, required String randomId, String? rating, List<String>? filterWords})
       : _apiKey = apiKey,
-        _rating = rating??GiphyRating.g,
+        _rating = rating ?? GiphyRating.g,
+        _filterWords = filterWords??[],
         _random_id = randomId;
 
   Future<GiphyCollection> trending({
@@ -50,6 +53,14 @@ class GiphyClient {
     String lang = GiphyLanguage.english,
     String type = GiphyType.gifs,
   }) async {
+    if (_filterWords.contains(query)) {
+      return GiphyCollection(
+        data: [],
+        pagination: GiphyPagination(totalCount: 0, count: 0, offset: offset),
+        meta: null,
+      );
+    }
+      
     return _fetchCollection(
       baseUri.replace(
         path: '$_apiVersion/$type/search',
