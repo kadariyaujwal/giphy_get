@@ -19,10 +19,13 @@ class GiphyClient {
   final String _rating;
   final List<String> _filterWords;
   GiphyClient(
-      {required String apiKey, required String randomId, String? rating, List<String>? filterWords})
+      {required String apiKey,
+      required String randomId,
+      String? rating,
+      List<String>? filterWords})
       : _apiKey = apiKey,
         _rating = rating ?? GiphyRating.g,
-        _filterWords = filterWords??[],
+        _filterWords = filterWords ?? [],
         _random_id = randomId;
 
   Future<GiphyCollection> trending({
@@ -54,13 +57,10 @@ class GiphyClient {
     String type = GiphyType.gifs,
   }) async {
     if (_filterWords.contains(query)) {
-      return GiphyCollection(
-        data: [],
-        pagination: GiphyPagination(totalCount: 0, count: 0, offset: offset),
-        meta: null,
-      );
+      await Future.delayed(Duration(seconds: 2));
+      return GiphyCollection.fromJson({});
     }
-      
+
     return _fetchCollection(
       baseUri.replace(
         path: '$_apiVersion/$type/search',
