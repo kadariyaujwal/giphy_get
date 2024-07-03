@@ -39,7 +39,8 @@ class GiphyGet {
   static Future<GiphyGif?> getGif({
     required BuildContext context,
     required String apiKey,
-    required List<String> filterWords,
+    List<String>? filterWords,
+    List<String>? replaceWords,
     String rating = GiphyRating.pg13,
     String lang = GiphyLanguage.english,
     String randomID = "",
@@ -95,7 +96,8 @@ class GiphyGet {
               searchText: searchText,
               rating: rating,
               lang: lang,
-              filterWords: filterWords,
+              filterWords: filterWords ?? [],
+              replaceWords: replaceWords ?? [],
             ),
           )
         ],

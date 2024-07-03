@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:giphy_get/src/client/models/gif.dart';
 import 'package:giphy_get/src/client/models/languages.dart';
@@ -18,14 +19,17 @@ class GiphyClient {
   final String _apiVersion = 'v1';
   final String _rating;
   final List<String> _filterWords;
-  GiphyClient(
-      {required String apiKey,
-      required String randomId,
-      String? rating,
-      List<String>? filterWords})
-      : _apiKey = apiKey,
+  final List<String> _replaceWords;
+  GiphyClient({
+    required String apiKey,
+    required String randomId,
+    String? rating,
+    List<String>? filterWords,
+    List<String>? replaceWords,
+  })  : _apiKey = apiKey,
         _rating = rating ?? GiphyRating.g,
         _filterWords = filterWords ?? [],
+        _replaceWords = replaceWords ?? [],
         _random_id = randomId;
 
   Future<GiphyCollection> trending({
@@ -57,8 +61,12 @@ class GiphyClient {
     String type = GiphyType.gifs,
   }) async {
     if (_filterWords.contains(query)) {
-      await Future.delayed(Duration(seconds: 2));
-      return GiphyCollection.fromJson({});
+      query = '';
+      if(_replaceWords.isNotEmpty) {
+        int randomIndex = Random().nextInt(_replaceWords.length);
+        query = _replaceWords[randomIndex];
+      }
+      
     }
 
     return _fetchCollection(
